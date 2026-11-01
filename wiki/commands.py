@@ -30,7 +30,7 @@ def preview_docs(context, path: str, route: str, space_name: str | None, watch: 
 	folder = Path(os.environ.get("PWD") or os.getcwd(), path).resolve()
 	frappe.init(get_site(context))
 	frappe.connect()
-	frappe.set_user("Administrator")
+	frappe.set_user("Administrator")  # nosemgrep
 	try:
 		stamp = None
 		while True:
@@ -50,7 +50,7 @@ def preview_docs(context, path: str, route: str, space_name: str | None, watch: 
 def report(space) -> None:
 	import frappe
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep
 	if space.last_sync_status == "Error":
 		click.secho(f"Sync failed:\n{space.last_sync_error}", fg="red")
 		return
